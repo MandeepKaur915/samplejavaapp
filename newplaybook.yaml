@@ -1,8 +1,8 @@
 - name: copyModule
-   hosts: tomcat
-   become: true
-   tasks:
-    - name: copying the war file.
-      ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/poc_integration/target
-        dest: /home/ubuntu/
+  hosts: tomcat
+  become: true
+  tasks:
+   - name: copying the war file.
+     ansible.builtin.copy:
+       src: /var/lib/jenkins/workspace/poc_integration/target
+       dest: /home/ubuntu/
