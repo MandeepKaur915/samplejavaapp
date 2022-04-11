@@ -4,4 +4,4 @@
    - name: copying the war file.
      ansible.builtin.copy:
        src: /var/lib/jenkins/workspace/poc_integration/target/sampleapp.war
-       dest: /home/ubuntu
+       dest: /var/lib/tomcat9/webapps
