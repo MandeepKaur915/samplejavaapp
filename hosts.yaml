@@ -1,5 +1,5 @@
 [tomcat]
-172.31.25.82 ansible_user=ubuntu
+172.31.25.82 ansible_user=root
 
 [other]
 ## 172.31.18.96
