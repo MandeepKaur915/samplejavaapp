@@ -1,5 +1,5 @@
 FROM tomcat:8.0-alpine
-COPY /var/lib/jenkins/workspace/poc_integration/target/sampleapp.war /usr/local/tomcat/webapps
+COPY /home/ubuntu/sampleapp.war /usr/local/tomcat/webapps
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
