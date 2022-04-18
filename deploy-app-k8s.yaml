@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: samplejavaapp
-        image: lerndevops/samplejavaapp
+        image: ec2-3-22-224-228.us-east-2.compute.amazonaws.com:8085/samplejavaapp
         ports:
         - containerPort: 8080
 
