@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: samplejavaapp
+  name: sampleapp
   labels:
-    app: samplejavaapp
+    app: sampleapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: samplejavaapp
+      app: sampleapp
   template:
     metadata:
       labels:
-        app: samplejavaapp
+        app: sampleapp
     spec:
       containers:
-      - name: samplejavaapp
-        image: ec2-3-22-224-228.us-east-2.compute.amazonaws.com:8085/samplejavaapp
+      - name: sampleapp
+        image: ec2-18-221-73-29.us-east-2.compute.amazonaws.com:8085/sampleapp:latest
         ports:
         - containerPort: 8080
 
@@ -25,11 +25,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: samplejavaapp-svc
+  name: sampleapp-svc
 spec:
   type: NodePort
   selector:
-    app: samplejavaapp
+    app: sampleapp
   ports:
   - protocol: TCP
     port: 8080
