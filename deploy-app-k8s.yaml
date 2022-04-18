@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: ec2-3-23-128-160.us-east-2.compute.amazonaws.com:8085/sampleapp:latest
+        image: ec2-3-23-128-160.us-east-2.compute.amazonaws.com:8085/sampleapp
         ports:
         - containerPort: 8080
 
