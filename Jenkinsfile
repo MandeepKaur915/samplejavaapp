@@ -3,7 +3,7 @@ node{
      checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MandeepKaur915/samplejavaapp.git']]])
    }
 
-   stagestage ("build jar"){
+   stage ("build jar"){
       sh "mvn clean install"
    }
    
