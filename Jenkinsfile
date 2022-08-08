@@ -23,4 +23,7 @@ node{
               }
           }
       }
+    stage('deploy') {
+          ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yaml', playbook: 'newplaybook.yaml'
+    }
 }
