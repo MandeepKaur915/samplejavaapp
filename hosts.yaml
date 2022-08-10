@@ -1,5 +1,5 @@
 [ubuntu]
-18.212.9.100 ansible_user=ubuntu
+44.204.232.75 ansible_user=ubuntu
 
 [other]
 ## 172.31.18.96
