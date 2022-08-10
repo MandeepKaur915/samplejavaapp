@@ -6,13 +6,13 @@
        src: /var/lib/jenkins/workspace/pipe/target/sampleapp.war
        dest: /var/lib/tomcat9/webapps
    
-   - name: shutdown qle tomcat ,path = "{{ tomcat_path }}/bin/"
-     command: sh {{ tomcat_path }}/bin/shutdown.sh
+   - name: shutdown qle tomcat 
+     command: sudo systemctl stop tomcat9
      
    - name: ==> sleep 3s
-      command: sleep 3s
+     command: sleep 3s
       
-   - name: ==> startup qle tomcat , path = {{ tomcat_path }}/bin/startup.sh
-      shell: setsid /bin/sh -i -c "{{ tomcat_path }}/bin/startup.sh"
+   - name: start tomcat 
+     command: sudo systemctl start tomcat9
    
        
