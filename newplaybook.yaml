@@ -6,5 +6,13 @@
        src: /var/lib/jenkins/workspace/pipe/target/sampleapp.war
        dest: /var/lib/tomcat9/webapps
 
-   
+  
+- name: shutdown tomcat 
+  command: sudo systemctl stop tomcat9
+
+- name: ==> sleep 60s
+  command: sleep 60s
+  
+- name: start tomcat 
+  command: sudo systemctl start tomcat9
        
