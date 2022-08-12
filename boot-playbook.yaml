@@ -3,8 +3,8 @@
   tasks:
    - name: copying the war file.
      ansible.builtin.copy:
-       src: /var/lib/jenkins/workspace/pipe/target/sampleapp.war
-       dest: /var/lib/tomcat9/webapps
+       src: /var/lib/jenkins/workspace/BootCamp/target/sampleapp.war
+       dest: /home/ec2-user/apache-tomcat-9.0.65/webapps
 
    - name: Start and Enable Tomcat 9 on sever 
      systemd:
