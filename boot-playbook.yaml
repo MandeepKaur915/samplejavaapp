@@ -1,0 +1,14 @@
+- name: copyModule
+  hosts: tomcat
+  tasks:
+   - name: copying the war file.
+     ansible.builtin.copy:
+       src: /var/lib/jenkins/workspace/pipe/target/sampleapp.war
+       dest: /var/lib/tomcat9/webapps
+
+   - name: Start and Enable Tomcat 9 on sever 
+     systemd:
+        name: apache-tomcat-9.0.65
+        state: restarted
+        daemon_reload: true
+        
