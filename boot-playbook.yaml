@@ -5,5 +5,17 @@
      ansible.builtin.copy:
        src: /var/lib/jenkins/workspace/BootCamp/target/sampleapp.war
        dest: /home/ec2-user/apache-tomcat-9.0.65/webapps
+       
+     notify:
+       - start tomcat
+       - wait for start
+    
+  handlers:
+    - name: start tomcat
+      command: "nohup /home/ec2-user/apache-tomcat-9.0.65/bin/startup.sh"
+    - name: wait for start
+      wait_for: port="8080" state=started
+       
+       
 
         
