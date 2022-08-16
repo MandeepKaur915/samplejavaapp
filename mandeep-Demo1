@@ -74,5 +74,13 @@ to push image with credential :
             }
         }
         
+   deploy on tomcat using ansible:
+   
+    stage('deploy') {
+            steps {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yaml', playbook: 'newplaybook.yaml'
+            }
+        }
+        
         
         
