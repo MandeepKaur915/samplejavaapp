@@ -58,3 +58,21 @@ pipeline {
         }
      }
 }
+
+
+
+
+
+to push image with credential :
+
+ stage('Pushing to dockerhub') {
+            steps{  
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'docker-hub')]) {
+                    sh "docker login -u itsmandymaan -p ${docker-hub}"
+                }
+                sh "docker push itsmandymaan/demo:v1"
+            }
+        }
+        
+        
+        
