@@ -172,6 +172,61 @@ def getVersion() {
     return PresentDay
 }
 
+=======================================
+
+pipeline {
+    agent any
+
+     environment {
+          Docker_TAG = getVersion()
+     } 
+     stages {
+        stage('checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MandeepKaur915/samplejavaapp']]])  
+            }
+        }
+         stage ("build jar") {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+          stage ("push to jfrog") {
+            steps {
+                script{
+                     sh """curl -u mandeep:Devops@22 -X PUT "https://mandeepartifactory.jfrog.io/artifactory/Demo/" -T target/sampleapp.war"""
+                }
+            }
+        }
+        stage ("Build image") {
+            steps {
+                sh "docker build . -t itsmandymaan/demo:${Docker_TAG}"
+            }
+        }
+        stage('Pushing to dockerhub') {
+            steps{
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHub')]) {
+                    sh "docker login -u itsmandymaan -p ${dockerHub}"
+                }
+                
+                sh "docker push itsmandymaan/demo:${Docker_TAG}"
+            }
+        }
+        stage('deploy') {
+            steps {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yaml', playbook: 'newplaybook.yaml'
+            }
+        }
+     }
+}
+
+def getVersion() {
+    def PresentDay = sh label: '', returnStdout: true, script: 'date +%d-%m-%Y'
+    return PresentDay
+}
+
+
+------------------------------------------------
 
 
 
