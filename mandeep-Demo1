@@ -83,4 +83,48 @@ to push image with credential :
         }
         
         
+        ==============================
+        
+        
+  pipeline {
+    agent any
+
+    environment {
+        registry = "itsmandymaan/demo"
+    } 
+     stages {
+        stage('checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MandeepKaur915/springboot-app']]])  
+            }
+        }
+         stage ("build jar") {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+
+        stage ("Build image") {
+            steps {
+                sh "docker build . -t itsmandymaan/demo:v1"
+            }
+        }
+        stage('Pushing to dockerhub') {
+            steps{
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHub')]) {
+                    sh "docker login -u itsmandymaan -p ${dockerHub}"
+                }
+                
+                sh "docker push itsmandymaan/demo:v1"
+            }
+        }
+        stage('deploy') {
+            steps {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts.yaml', playbook: 'newplaybook.yaml'
+            }
+        }
+     }
+     
+     =========================================
+        
         
